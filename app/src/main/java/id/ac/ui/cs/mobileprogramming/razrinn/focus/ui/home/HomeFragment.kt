@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.R
+import org.w3c.dom.Text
 
 class HomeFragment : Fragment() {
 
@@ -22,10 +23,12 @@ class HomeFragment : Fragment() {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        val textView: TextView = root.findViewById(R.id.hey_name)
+        textView.text = "Hey, Ray!"
+//        val textView: TextView = root.findViewById(R.id.text_home)
+//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
         return root
     }
 }

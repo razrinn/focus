@@ -6,8 +6,21 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_sessions">Sessions</string>
+    <string name="menu_settings">Settings</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="your_stats">Your Stats</string>
+    <string name="create_session">Create New Session</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
+    <string name="field_session_goal">What are you trying to finish today?</string>
+    <string name="play_relaxing_music">Play Relaxing Music</string>
+    <string name="rain">Rain</string>
+    <string name="city_traffic">City Traffic</string>
+    <string name="waterfall">Waterfall</string>
+    <string name="nature_forest">Nature Forest</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="session">Session</string>
 </resources>
