@@ -5,19 +5,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail.SessionFinished
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail.SessionUnfinished
 
 class DetailSessionActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val isFinished = intent.getBooleanExtra("test_is_finished", false)
-        if (isFinished) setContentView(R.layout.activity_finished_session)
-        else setContentView(R.layout.activity_unfinished_session)
+        setContentView(R.layout.activity_detail_session)
+        val newFragment = if (isFinished) SessionFinished() else SessionUnfinished()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container_detail_session, newFragment)
+            .commit()
         setTitle(R.string.session)
-
-        val testText = findViewById<TextView>(R.id.test)
-        testText?.text = intent.getStringExtra("test_content")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
