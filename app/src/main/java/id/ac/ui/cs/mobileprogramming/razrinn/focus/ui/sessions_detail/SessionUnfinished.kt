@@ -1,21 +1,20 @@
 package id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.R
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.SessionWithTasks
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -24,14 +23,12 @@ private const val ARG_PARAM2 = "param2"
  */
 class SessionUnfinished : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var viewModel: SessionDetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
@@ -40,6 +37,7 @@ class SessionUnfinished : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        viewModel = ViewModelProvider(activity!!).get(SessionDetailViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_session_unfinished, container, false)
         val playPauseBtn = view.findViewById<FloatingActionButton>(R.id.play_pause_btn)
         playPauseBtn.setOnClickListener {
@@ -62,25 +60,21 @@ class SessionUnfinished : Fragment() {
                 "Look at me, I'm a fancy add new task", Snackbar.LENGTH_LONG
             ).show()
         }
+        viewModel.session?.observe(viewLifecycleOwner,
+            Observer<SessionWithTasks> {
+                val sessionGoalText = view.findViewById<TextView>(R.id.session_goal_unfinished)
+                sessionGoalText.text = it.session.goal
+            })
         return view
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SessionUnfinished.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             SessionUnfinished().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
                 }
             }
     }

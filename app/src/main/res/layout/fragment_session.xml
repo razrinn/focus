@@ -13,7 +13,7 @@
         android:layout_marginBottom="8dp"
         >
         <TextView
-            android:id="@+id/content"
+            android:id="@+id/session_list_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
@@ -22,21 +22,21 @@
             android:layout_weight="1"
             />
         <TextView
+            android:id="@+id/session_list_is_finished"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Finished"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_weight="1"
             android:gravity="end"
-            android:textColor="@color/colorSuccess"
             />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/session_list_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="18 Desember 2020, 08:00"
         android:textSize="14sp"
+        android:textAppearance="?attr/textAppearanceListItem"
         />
 </LinearLayout>

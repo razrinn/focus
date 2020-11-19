@@ -1,22 +1,21 @@
-package id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions
+package id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail
 
 import android.content.Intent
 import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.DetailSessionActivity
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.MainActivity
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.R
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.SessionWithTasks
 
-
-class SessionListAdapter(
+class TaskListAdapter(
     private val values: List<SessionWithTasks>,
     private val mainActivity: MainActivity
-) : RecyclerView.Adapter<SessionListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<TaskListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_session, parent, false)

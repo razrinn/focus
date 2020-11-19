@@ -14,7 +14,7 @@ interface CategoryDao {
     fun getSortedCategories(): LiveData<List<Category>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(category: Category): LiveData<Category>
+    suspend fun insert(category: Category): Long
 
     @Query("DELETE FROM category_table")
     suspend fun deleteAll()

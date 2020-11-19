@@ -7,11 +7,12 @@ import java.util.*
 
 @Entity(tableName = "session_table")
 data class Session(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "goal") val goal: String,
-    @ColumnInfo(name = "review") val review: String,
-    @ColumnInfo(name = "rating") val rating: Int,
-    @ColumnInfo(name = "is_finished") val isFinished: Boolean,
-    @ColumnInfo(name = "created_at") val createdAt: Date,
-    @ColumnInfo(name = "category_id") val categoryId: Long
+    @ColumnInfo(name = "review") val review: String = "",
+    @ColumnInfo(name = "rating") val rating: Int = 0,
+    @ColumnInfo(name = "total_time") val totalTime: Int = 0,
+    @ColumnInfo(name = "is_finished") val isFinished: Boolean = false,
+    @ColumnInfo(name = "created_at") val createdAt: Date = Date(),
+    @ColumnInfo(name = "category_id") val categoryId: Int
 )

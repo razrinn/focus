@@ -3,20 +3,21 @@ package id.ac.ui.cs.mobileprogramming.razrinn.focus.database.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.Session
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.SessionWithTasks
 
 @Dao
 interface SessionDao {
     @Query("SELECT * FROM session_table")
-    fun getAllSession(): LiveData<List<Session>>
+    fun getAllSession(): LiveData<List<SessionWithTasks>>
 
     @Query("SELECT * FROM session_table WHERE id= :sessionId")
-    fun getSessionById(sessionId: Long): LiveData<Session>
+    fun getSessionById(sessionId: Int): LiveData<SessionWithTasks>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(session: Session): LiveData<Session>
+    suspend fun insert(session: Session): Long
 
     @Update
-    suspend fun updateSession(session: Session): LiveData<Session>
+    suspend fun updateSession(session: Session): Int
 
     @Query("DELETE FROM session_table")
     suspend fun deleteAll()

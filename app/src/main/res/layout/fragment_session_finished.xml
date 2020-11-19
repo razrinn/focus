@@ -5,7 +5,7 @@
     android:padding="16dp"
     android:orientation="vertical">
     <TextView
-        android:id="@+id/session_goal_unfinished"
+        android:id="@+id/session_goal_finished"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Do Personal Site Project"

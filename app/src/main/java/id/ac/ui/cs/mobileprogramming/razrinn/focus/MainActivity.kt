@@ -1,6 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.razrinn.focus
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -11,11 +12,17 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.application.FocusApplication
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions.SessionViewModel
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions.SessionViewModelFactory
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_dialog.CreateSessionDialog
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private val sessionViewModel: SessionViewModel by viewModels {
+        SessionViewModelFactory((application as FocusApplication).focusRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

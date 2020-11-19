@@ -10,8 +10,8 @@ interface UserDao {
     fun getUser(): LiveData<User>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(user: User): LiveData<User>
+    suspend fun insert(user: User): Long
 
     @Update
-    suspend fun updateUser(user: User): LiveData<User>
+    suspend fun updateUser(user: User): Int
 }
