@@ -50,4 +50,9 @@
     <string name="confirm">Confirm</string>
     <string name="field_session_review">How do you feel about this session?</string>
     <string name="field_session_rating">From 1 to 5, how would you rate this session?</string>
+    <string name="field_task_name">Split your goal to small tasks</string>
+    <string name="create_task">Create Task</string>
+    <string name="priority">Priority</string>
+    <string name="category">Category</string>
+    <string name="no_task_yet">You don\'t have any tasks yet</string>
 </resources>

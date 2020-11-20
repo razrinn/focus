@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [Category::class, Session::class, Task::class, User::class],
-    version = 3,
+    version = 1,
     exportSchema = false
 )
 @TypeConverters(DateConverter::class)
@@ -48,11 +48,6 @@ abstract class ApplicationDatabase : RoomDatabase() {
             categoryDao.insert(category)
             category = Category(name = "Other", description = "Other category")
             categoryDao.insert(category)
-
-            var session = Session(goal = "Web Development", categoryId =  category.id)
-            sessionDao.insert(session)
-            session = Session(goal = "Web Development 2", categoryId =  category.id)
-            sessionDao.insert(session)
         }
     }
 

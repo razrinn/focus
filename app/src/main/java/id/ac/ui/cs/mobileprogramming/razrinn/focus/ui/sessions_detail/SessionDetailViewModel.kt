@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.Category
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.Session
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.SessionWithTasks
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.Task
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.repository.FocusRepository
 import kotlinx.coroutines.launch
 
@@ -17,6 +18,9 @@ class SessionDetailViewModel(private val repository: FocusRepository): ViewModel
     }
     fun update(session: Session) = viewModelScope.launch {
         repository.updateSession(session)
+    }
+    fun addTask(task: Task) = viewModelScope.launch{
+        repository.insertTask(task)
     }
 }
 class SessionDetailViewModelFactory(private val repository: FocusRepository) : ViewModelProvider.Factory {

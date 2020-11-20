@@ -97,9 +97,10 @@
                 android:textColor="@color/colorPrimary"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/no_task_yet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="You don't have any tasks yet"
+            android:text="@string/no_task_yet"
             android:gravity="center"
             android:layout_marginBottom="24dp"/>
     </LinearLayout>

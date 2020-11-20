@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.DetailSessionActivity
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.R
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.SessionWithTasks
 
@@ -48,6 +51,18 @@ class SessionFinished : Fragment() {
                 sessionRating.text = it.session.rating.toString()
                 sessionReview.text = it.session.review
             })
+        val recyclerView = view.findViewById<RecyclerView>(R.id.list_task)
+        if (recyclerView is RecyclerView) {
+            with(recyclerView) {
+                layoutManager = LinearLayoutManager(context)
+                activity?.let {act ->
+                    viewModel.session?.observe(act, Observer {sessions->
+                        Log.d("PRINT", sessions.tasks.toString())
+                        adapter = TaskListAdapter(sessions.tasks, activity!! as DetailSessionActivity)
+                    })
+                }
+            }
+        }
         return view
     }
 

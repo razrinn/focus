@@ -1,6 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.R
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.SessionWithTasks
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_dialog.FinishSessionDialog
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.task_dialog.CreateTaskDialog
 
 
 /**
@@ -36,6 +38,7 @@ class SessionUnfinished : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val fragmentManager = activity?.supportFragmentManager
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(activity!!).get(SessionDetailViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_session_unfinished, container, false)
@@ -48,7 +51,6 @@ class SessionUnfinished : Fragment() {
         }
         val finishSessionBtn = view.findViewById<Button>(R.id.finish_session_btn)
         finishSessionBtn.setOnClickListener {
-            val fragmentManager = activity?.supportFragmentManager
             val dialog = FinishSessionDialog(viewModel)
             if (fragmentManager != null) {
                 dialog.show(fragmentManager, "finish_session")
@@ -56,13 +58,16 @@ class SessionUnfinished : Fragment() {
         }
         val addNewTaskBtn = view.findViewById<TextView>(R.id.add_new_task_btn)
         addNewTaskBtn.setOnClickListener {
-            Snackbar.make(
-                activity!!.findViewById(R.id.container_detail_session),
-                "Look at me, I'm a fancy add new task", Snackbar.LENGTH_LONG
-            ).show()
+            val dialog = CreateTaskDialog(viewModel)
+            if (fragmentManager != null) {
+                dialog.show(fragmentManager, "create_task")
+            }
         }
         viewModel.session?.observe(viewLifecycleOwner,
             Observer<SessionWithTasks> {
+                val noTaskView: TextView = view.findViewById(R.id.no_task_yet)
+                if(it.tasks.isEmpty()) noTaskView.visibility = View.VISIBLE
+                else noTaskView.visibility = View.INVISIBLE
                 val sessionGoalText = view.findViewById<TextView>(R.id.session_goal_unfinished)
                 sessionGoalText.text = it.session.goal
             })
