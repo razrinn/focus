@@ -26,6 +26,7 @@ import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.SessionWithTa
  */
 class SessionFinished : Fragment() {
     private lateinit var viewModel: SessionDetailViewModel
+    private lateinit var taskViewModel: TaskViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,7 @@ class SessionFinished : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(activity!!).get(SessionDetailViewModel::class.java)
+        taskViewModel = ViewModelProvider(activity!!).get(TaskViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_session_finished, container, false)
         viewModel.session?.observe(viewLifecycleOwner,
             Observer<SessionWithTasks> {
@@ -56,9 +58,11 @@ class SessionFinished : Fragment() {
             with(recyclerView) {
                 layoutManager = LinearLayoutManager(context)
                 activity?.let {act ->
-                    viewModel.session?.observe(act, Observer {sessions->
-                        Log.d("PRINT", sessions.tasks.toString())
-                        adapter = TaskListAdapter(sessions.tasks, activity!! as DetailSessionActivity)
+                    taskViewModel.tasks?.observe(act, Observer {tasks->
+                        val noTaskView: TextView = view.findViewById(R.id.no_task_yet_unf)
+                        if(tasks.isEmpty()) noTaskView.visibility = View.VISIBLE
+                        else noTaskView.visibility = View.GONE
+                        adapter = TaskListAdapter(tasks, activity!! as DetailSessionActivity)
                     })
                 }
             }

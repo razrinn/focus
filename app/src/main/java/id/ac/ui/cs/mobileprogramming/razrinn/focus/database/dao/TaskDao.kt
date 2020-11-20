@@ -9,7 +9,7 @@ interface TaskDao {
     @Query("SELECT * FROM task_table")
     fun getAllTasks(): LiveData<List<Task>>
 
-    @Query("SELECT * FROM task_table WHERE session_id= :sessionId")
+    @Query("SELECT * FROM task_table WHERE session_id= :sessionId ORDER BY is_finished, priority DESC")
     fun getTasksBySessionId(sessionId: Int): LiveData<List<Task>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

@@ -45,6 +45,12 @@ class FocusRepository(
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
+    suspend fun updateTask(task: Task) {
+        taskDao.updateTask(task)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
     suspend fun getTaskBySessionId(sessionId: Int): LiveData<List<Task>> {
         return taskDao.getTasksBySessionId(sessionId)
     }

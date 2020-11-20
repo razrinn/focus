@@ -63,6 +63,13 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginBottom="8dp"/>
+        <TextView
+            android:id="@+id/no_task_yet_unf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_task_yet"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
         <androidx.recyclerview.widget.RecyclerView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"

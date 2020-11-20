@@ -1,7 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.R
@@ -26,6 +27,7 @@ import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.task_dialog.CreateTaskDial
 class SessionUnfinished : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var viewModel: SessionDetailViewModel
+    private lateinit var taskViewModel: TaskViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,7 @@ class SessionUnfinished : Fragment() {
         val fragmentManager = activity?.supportFragmentManager
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(activity!!).get(SessionDetailViewModel::class.java)
+        taskViewModel = ViewModelProvider(activity!!).get(TaskViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_session_unfinished, container, false)
         val playPauseBtn = view.findViewById<FloatingActionButton>(R.id.play_pause_btn)
         playPauseBtn.setOnClickListener {
@@ -65,12 +68,23 @@ class SessionUnfinished : Fragment() {
         }
         viewModel.session?.observe(viewLifecycleOwner,
             Observer<SessionWithTasks> {
-                val noTaskView: TextView = view.findViewById(R.id.no_task_yet)
-                if(it.tasks.isEmpty()) noTaskView.visibility = View.VISIBLE
-                else noTaskView.visibility = View.INVISIBLE
                 val sessionGoalText = view.findViewById<TextView>(R.id.session_goal_unfinished)
                 sessionGoalText.text = it.session.goal
             })
+        val recyclerView = view.findViewById<RecyclerView>(R.id.checkbox_task)
+        if (recyclerView is RecyclerView) {
+            with(recyclerView) {
+                layoutManager = LinearLayoutManager(context)
+                activity?.let {act ->
+                    taskViewModel.tasks?.observe(act, Observer {tasks->
+                        val noTaskView: TextView = view.findViewById(R.id.no_task_yet)
+                        if(tasks.isEmpty()) noTaskView.visibility = View.VISIBLE
+                        else noTaskView.visibility = View.GONE
+                        adapter = TaskCheckboxAdapter(tasks, taskViewModel)
+                    })
+                }
+            }
+        }
         return view
     }
 

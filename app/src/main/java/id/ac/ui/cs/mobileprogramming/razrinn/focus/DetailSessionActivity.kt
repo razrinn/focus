@@ -8,14 +8,14 @@ import androidx.lifecycle.ViewModelProvider
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.application.FocusApplication
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions.SessionViewModel
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions.SessionViewModelFactory
-import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail.SessionDetailViewModel
-import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail.SessionDetailViewModelFactory
-import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail.SessionFinished
-import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail.SessionUnfinished
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail.*
 
 class DetailSessionActivity : AppCompatActivity() {
     private val viewModel: SessionDetailViewModel by viewModels {
         SessionDetailViewModelFactory((application as FocusApplication).focusRepository)
+    }
+    private val taskViewModel: TaskViewModel by viewModels {
+        TaskViewModelFactory((application as FocusApplication).focusRepository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +23,7 @@ class DetailSessionActivity : AppCompatActivity() {
         val sessionId = intent.getIntExtra("session_id", 0)
         setContentView(R.layout.activity_detail_session)
         viewModel.setSession(sessionId)
+        taskViewModel.setTasks(sessionId)
         val newFragment = if (isFinished) SessionFinished() else SessionUnfinished()
         supportFragmentManager.beginTransaction()
             .replace(R.id.container_detail_session, newFragment)

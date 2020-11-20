@@ -103,5 +103,14 @@
             android:text="@string/no_task_yet"
             android:gravity="center"
             android:layout_marginBottom="24dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/checkbox_task"
+            android:name="id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions.SessionFinished"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="LinearLayoutManager"
+            tools:context=".ui.sessions_detail.SessionUnfinished"
+            tools:listitem="@layout/fragment_task_checkbox_item" />
     </LinearLayout>
 </ScrollView>
