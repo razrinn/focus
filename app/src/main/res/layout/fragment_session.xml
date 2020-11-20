@@ -31,7 +31,14 @@
             android:gravity="end"
             />
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/session_list_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:layout_marginBottom="8dp"
+        />
     <TextView
         android:id="@+id/session_list_date"
         android:layout_width="wrap_content"

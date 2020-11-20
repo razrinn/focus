@@ -1,21 +1,28 @@
 package id.ac.ui.cs.mobileprogramming.razrinn.focus
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.activity.viewModels
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.application.FocusApplication
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.Category
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.Session
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions.SessionViewModel
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions.SessionViewModelFactory
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_dialog.CreateSessionDialog
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
-            val fragmentManager  = supportFragmentManager
+            val fragmentManager = supportFragmentManager
             val dialog = CreateSessionDialog()
             dialog.show(fragmentManager, "create_session")
         }
@@ -41,8 +48,11 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+            ), drawerLayout
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 

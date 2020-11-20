@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.R
@@ -38,7 +39,14 @@ class SessionFinished : Fragment() {
         val view = inflater.inflate(R.layout.fragment_session_finished, container, false)
         viewModel.session?.observe(viewLifecycleOwner,
             Observer<SessionWithTasks> {
-                Log.d("DEBUG_FRAGMENT", it.session.goal)
+                val sessionName:TextView = view.findViewById(R.id.session_goal_finished)
+                val sessionTime:TextView = view.findViewById(R.id.session_detail_time)
+                val sessionRating:TextView = view.findViewById(R.id.session_detail_rating)
+                val sessionReview:TextView = view.findViewById(R.id.session_detail_review)
+                sessionName.text = it.session.goal
+                sessionTime.text = it.session.totalTime.toString()
+                sessionRating.text = it.session.rating.toString()
+                sessionReview.text = it.session.review
             })
         return view
     }

@@ -9,10 +9,10 @@ import java.util.*
 data class Session(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "goal") val goal: String,
-    @ColumnInfo(name = "review") val review: String = "",
-    @ColumnInfo(name = "rating") val rating: Int = 0,
-    @ColumnInfo(name = "total_time") val totalTime: Int = 0,
-    @ColumnInfo(name = "is_finished") val isFinished: Boolean = false,
+    @ColumnInfo(name = "review") var review: String = "",
+    @ColumnInfo(name = "rating") var rating: Int = 0,
+    @ColumnInfo(name = "total_time") var totalTime: Int = 0,
+    @ColumnInfo(name = "is_finished") var isFinished: Boolean = false,
     @ColumnInfo(name = "created_at") val createdAt: Date = Date(),
     @ColumnInfo(name = "category_id") val categoryId: Int
 )

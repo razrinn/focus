@@ -33,8 +33,8 @@ class FocusRepository(
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertCategory(category: Category) {
-        categoryDao.insert(category)
+    suspend fun updateSession(session: Session) {
+        sessionDao.updateSession(session)
     }
 
     @Suppress("RedundantSuspendModifier")

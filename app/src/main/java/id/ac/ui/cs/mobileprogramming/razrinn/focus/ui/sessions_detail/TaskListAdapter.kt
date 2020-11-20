@@ -35,7 +35,6 @@ class TaskListAdapter(
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetailSessionActivity::class.java)
             intent.putExtra("session_id", item.id)
-            Log.d("DEBUG_ADAPTER", item.id.toString())
             intent.putExtra("session_is_finished", item.isFinished)
             holder.itemView.context.startActivity(intent)
         }

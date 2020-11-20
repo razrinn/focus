@@ -1,7 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.R
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.SessionWithTasks
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_dialog.FinishSessionDialog
 
 
 /**
@@ -48,10 +48,11 @@ class SessionUnfinished : Fragment() {
         }
         val finishSessionBtn = view.findViewById<Button>(R.id.finish_session_btn)
         finishSessionBtn.setOnClickListener {
-            Snackbar.make(
-                activity!!.findViewById(R.id.container_detail_session),
-                "Look at me, I'm a fancy finish session", Snackbar.LENGTH_LONG
-            ).show()
+            val fragmentManager = activity?.supportFragmentManager
+            val dialog = FinishSessionDialog(viewModel)
+            if (fragmentManager != null) {
+                dialog.show(fragmentManager, "finish_session")
+            }
         }
         val addNewTaskBtn = view.findViewById<TextView>(R.id.add_new_task_btn)
         addNewTaskBtn.setOnClickListener {

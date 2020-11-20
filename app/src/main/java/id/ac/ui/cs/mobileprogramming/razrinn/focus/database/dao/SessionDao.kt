@@ -7,7 +7,7 @@ import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.SessionWithTa
 
 @Dao
 interface SessionDao {
-    @Query("SELECT * FROM session_table")
+    @Query("SELECT * FROM session_table ORDER BY  is_finished ASC, created_at DESC")
     fun getAllSession(): LiveData<List<SessionWithTasks>>
 
     @Query("SELECT * FROM session_table WHERE id= :sessionId")

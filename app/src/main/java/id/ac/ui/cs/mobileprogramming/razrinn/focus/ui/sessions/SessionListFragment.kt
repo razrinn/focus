@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.MainActivity
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.R
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.application.FocusApplication
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.database.entity.Category
 
 /**
  * A fragment representing a list of Items.
@@ -41,7 +42,9 @@ class SessionListFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context)
                 activity?.let {act ->
                     viewModel.allSessions.observe(act, Observer {sessions->
-                        adapter = SessionListAdapter(sessions, activity!! as MainActivity)
+                        viewModel.allCategories.observe(act, Observer <List<Category>>{
+                            adapter = SessionListAdapter(sessions, activity!! as MainActivity, it)
+                        })
                     })
                 }
             }

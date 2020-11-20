@@ -46,4 +46,8 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="_finish_session_confirmation">Are you sure you want to finish this session?</string>
+    <string name="confirm">Confirm</string>
+    <string name="field_session_review">How do you feel about this session?</string>
+    <string name="field_session_rating">From 1 to 5, how would you rate this session?</string>
 </resources>
