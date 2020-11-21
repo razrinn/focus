@@ -2,11 +2,15 @@ package id.ac.ui.cs.mobileprogramming.razrinn.focus
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -24,9 +29,11 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.application.FocusApplication
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.service.QuoteService
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions.SessionViewModel
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions.SessionViewModelFactory
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.ui.sessions_dialog.CreateSessionDialog
+import id.ac.ui.cs.mobileprogramming.razrinn.focus.util.AppConstants
 import id.ac.ui.cs.mobileprogramming.razrinn.focus.util.PrefUtil
 
 
@@ -36,14 +43,33 @@ class MainActivity : AppCompatActivity() {
     private val sessionViewModel: SessionViewModel by viewModels {
         SessionViewModelFactory((application as FocusApplication).focusRepository)
     }
+    private var quoteReceiver: BroadcastReceiver? = null
     private var imageView: ImageView? = null
     private var profilePhoto: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        startQuoteService()
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
+        quoteReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                if (intent.action.toString() == AppConstants.GET_QUOTE) {
+                    val author = intent.getStringExtra("author")
+                    val content = intent.getStringExtra("content")
+                    val tv1: TextView = findViewById(R.id.quote_content)
+                    val tv2: TextView = findViewById(R.id.quote_author)
+                    tv1.text = content
+                    tv2.text = author
+                }
+            }
+        }
+        LocalBroadcastManager
+            .getInstance(this)
+            .registerReceiver(
+                quoteReceiver as BroadcastReceiver,
+                IntentFilter(AppConstants.GET_QUOTE)
+            )
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
             val fragmentManager = supportFragmentManager
@@ -123,6 +149,12 @@ class MainActivity : AppCompatActivity() {
                     selectImage()
                 }
             }
+        }
+    }
+
+    private fun startQuoteService(){
+        Intent(this, QuoteService::class.java).also { intent ->
+            startService(intent)
         }
     }
 

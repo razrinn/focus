@@ -6,5 +6,6 @@ class AppConstants {
         const val ACTION_PAUSE = "pause"
         const val ACTION_RESUME = "resume"
         const val ACTION_START = "start"
+        const val GET_QUOTE = "get_quote"
     }
 }

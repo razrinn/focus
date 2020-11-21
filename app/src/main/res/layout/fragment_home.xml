@@ -128,7 +128,8 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnCount="2">
+        android:columnCount="2"
+        android:layout_marginBottom="16dp">
         <Button
             android:id="@+id/music_1"
             android:layout_width="wrap_content"
@@ -154,4 +155,20 @@
             android:layout_columnWeight="1"
             android:text="@string/nature_forest" />
     </GridLayout>
+    <TextView
+        android:id="@+id/quote_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="@string/dummy_quote_content"
+        android:layout_marginBottom="8dp"
+        />
+    <TextView
+        android:id="@+id/quote_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="@string/dummy_quote_author"
+        />
 </LinearLayout>

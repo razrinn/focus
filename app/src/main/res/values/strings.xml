@@ -56,4 +56,6 @@
     <string name="average_session_rating">Average Session Rating</string>
     <string name="you_have_unfinished_session">You Have Unfinished Session</string>
     <string name="continue_session">Continue</string>
+    <string name="dummy_quote_content">You can\'t separate peace from freedom because no one can be at peace unless he has his freedom.</string>
+    <string name="dummy_quote_author">Malcolm X</string>
 </resources>
