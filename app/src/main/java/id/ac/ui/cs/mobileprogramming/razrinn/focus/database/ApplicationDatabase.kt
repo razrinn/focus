@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [Category::class, Session::class, Task::class, User::class],
+    entities = [Category::class, Session::class, Task::class],
     version = 1,
     exportSchema = false
 )
@@ -20,7 +20,6 @@ abstract class ApplicationDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun sessionDao(): SessionDao
     abstract fun taskDao(): TaskDao
-    abstract fun userDao(): UserDao
 
     private class ApplicationDatabaseCallback(
         private val scope: CoroutineScope

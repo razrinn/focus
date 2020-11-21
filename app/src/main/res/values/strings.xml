@@ -33,19 +33,10 @@
     <string name="session_rating">Session Rating</string>
     <string name="session_review">Session Review</string>
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="_finish_session_confirmation">Are you sure you want to finish this session?</string>
     <string name="confirm">Confirm</string>
     <string name="field_session_review">How do you feel about this session?</string>
@@ -55,4 +46,14 @@
     <string name="priority">Priority</string>
     <string name="category">Category</string>
     <string name="no_task_yet">You don\'t have any tasks yet</string>
+    <string name="user">User</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="job_title">Job Title</string>
+    <string name="hey">Hey,</string>
+    <string name="average_time_per_session">Average Time per Session</string>
+    <string name="average_task_per_session">Average Task per Session</string>
+    <string name="average_session_rating">Average Session Rating</string>
+    <string name="you_have_unfinished_session">You Have Unfinished Session</string>
+    <string name="continue_session">Continue</string>
 </resources>

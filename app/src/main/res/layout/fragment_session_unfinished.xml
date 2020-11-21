@@ -17,14 +17,59 @@
             android:textSize="24sp"
             android:gravity="center"
             android:layout_marginBottom="24dp"/>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/play_pause_btn"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:minWidth="306dp"
+            android:minHeight="306dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/timer_countdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="15:00"
+                android:textSize="70sp"/>
+            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                android:id="@+id/progress_countdown"
+                style="@style/Widget.MaterialProgressBar.ProgressBar"
+                android:minWidth="320dp"
+                android:minHeight="320dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/colorPrimary"
-            app:srcCompat="@android:drawable/ic_media_play"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/play_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="12dp"
+                android:backgroundTint="@color/colorPrimary"
+                app:srcCompat="@android:drawable/ic_media_play"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/pause_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="12dp"
+                android:backgroundTint="@color/colorPrimary"
+                app:srcCompat="@android:drawable/ic_media_pause"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,42 +77,36 @@
             android:baselineAligned="false"
             android:layout_marginVertical="24dp"
             >
-            <LinearLayout
+            <Button
+                android:id="@+id/select_pomodoro_btn"
+                android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/pomodoro"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                />
+            <Button
+                android:id="@+id/select_long_btn"
                 android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pomodoro"
-                    android:textColor="@color/colorPrimary"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorSuccess"
+                android:text="@string/long_break"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                />
+            <Button
+                android:id="@+id/select_short_btn"
                 android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/long_break"
-                    android:textColor="@color/colorSuccess"
-                    android:gravity="center"/>
-            </LinearLayout>
-            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/short_break"
-                    android:textColor="@color/colorDanger"
-                    android:gravity="center"/>
-            </LinearLayout>
+                android:backgroundTint="@color/colorDanger"
+                android:text="@string/short_break"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                />
         </LinearLayout>
         <Button
             android:id="@+id/finish_session_btn"

@@ -33,7 +33,11 @@ class FinishSessionDialog(private val viewModel: SessionDetailViewModel) : Dialo
                         s.review = reviewView.text.toString()
                         s.rating = ratingView.text.toString().toInt()
                         s.isFinished = true
+                        viewModel.counter.observe(this, Observer {c ->
+                            s.totalTime = c
+                        })
                         viewModel.update(s)
+                        viewModel.resetCounter()
                     })
                     activity!!.finish()
                 }
