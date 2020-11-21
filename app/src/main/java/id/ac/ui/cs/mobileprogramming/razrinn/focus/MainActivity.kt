@@ -152,6 +152,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStop() {
+        quoteReceiver?.let {
+            LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
+        }
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        quoteReceiver?.let {
+            LocalBroadcastManager.getInstance(this).unregisterReceiver(it)
+        }
+        super.onDestroy()
+    }
+
     private fun startQuoteService(){
         Intent(this, QuoteService::class.java).also { intent ->
             startService(intent)
