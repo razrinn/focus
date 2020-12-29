@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
     private var quoteReceiver: BroadcastReceiver? = null
     private var imageView: ImageView? = null
     private var profilePhoto: String = ""
+    private external fun capitalizeText(text: String): String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -59,8 +60,8 @@ class MainActivity : AppCompatActivity() {
                     val content = intent.getStringExtra("content")
                     val tv1: TextView = findViewById(R.id.quote_content)
                     val tv2: TextView = findViewById(R.id.quote_author)
-                    tv1.text = content
-                    tv2.text = author
+                    tv1.text = capitalizeText(content!!)
+                    tv2.text = capitalizeText(author!!)
                 }
             }
         }
@@ -175,5 +176,8 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val PICK_IMAGE_REQUEST_CODE = 1000
         const val READ_EXTERNAL_STORAGE_REQUEST_CODE = 1001
+        init {
+            System.loadLibrary("native-fun")
+        }
     }
 }

@@ -1,7 +1,10 @@
 package id.ac.ui.cs.mobileprogramming.razrinn.focus.service
 
 import android.app.Service
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Handler
 import android.os.IBinder
 import android.util.Log
@@ -23,7 +26,14 @@ class QuoteService : Service() {
     // task to be run here
     private val runnableService: Runnable = object : Runnable {
         override fun run() {
-            loadData()
+            if(isNetworkAvailable(applicationContext)){
+                loadData()
+            } else {
+                Toast.makeText(
+                    applicationContext,
+                    "No internet connection detected. Please check your connectivity",
+                    Toast.LENGTH_SHORT).show()
+            }
             mHandler?.postDelayed(this, DEFAULT_SYNC_INTERVAL)
         }
     }
@@ -62,6 +72,15 @@ class QuoteService : Service() {
             }
         })
     }
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo: NetworkInfo?
+        activeNetworkInfo = cm.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
+    }
+
+
     companion object{
         const val DEFAULT_SYNC_INTERVAL = 10 * 1000.toLong()
     }
