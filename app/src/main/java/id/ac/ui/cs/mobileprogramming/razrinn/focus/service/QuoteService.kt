@@ -15,15 +15,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 class QuoteService : Service() {
-
     override fun onBind(intent: Intent): IBinder {
         TODO("Return the communication channel to the service.")
     }
-
     private var mHandler: Handler? = null
-
     // task to be run here
     private val runnableService: Runnable = object : Runnable {
         override fun run() {
@@ -31,7 +27,6 @@ class QuoteService : Service() {
             mHandler?.postDelayed(this, DEFAULT_SYNC_INTERVAL)
         }
     }
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         // Create the Handler object
         mHandler = Handler()
@@ -67,8 +62,7 @@ class QuoteService : Service() {
             }
         })
     }
-
     companion object{
-        const val DEFAULT_SYNC_INTERVAL = 60 * 1000.toLong()
+        const val DEFAULT_SYNC_INTERVAL = 10 * 1000.toLong()
     }
 }
