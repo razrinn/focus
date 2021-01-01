@@ -2,10 +2,8 @@ package id.ac.ui.cs.mobileprogramming.razrinn.focus
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.Activity
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.app.AlertDialog
+import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -149,6 +147,9 @@ class MainActivity : AppCompatActivity() {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     selectImage()
                 }
+                else {
+                    showDenyPermissionDialog()
+                }
             }
         }
     }
@@ -171,6 +172,24 @@ class MainActivity : AppCompatActivity() {
         Intent(this, QuoteService::class.java).also { intent ->
             startService(intent)
         }
+    }
+
+    private fun showDenyPermissionDialog() {
+        val builder =
+            AlertDialog.Builder(this)
+
+        builder.setMessage("Focus Need File Access Permission to choose your profile picture. Please grant the permission to continue using Focus.")
+        builder.setTitle("Warning!")
+        builder.setCancelable(false)
+
+        builder
+            .setPositiveButton(
+                "Close",
+                DialogInterface.OnClickListener { dialog, which ->
+                })
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.show()
     }
 
     companion object {
