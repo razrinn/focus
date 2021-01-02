@@ -56,10 +56,14 @@ class MainActivity : AppCompatActivity() {
                 if (intent.action.toString() == AppConstants.GET_QUOTE) {
                     val author = intent.getStringExtra("author")
                     val content = intent.getStringExtra("content")
-                    val tv1: TextView = findViewById(R.id.quote_content)
-                    val tv2: TextView = findViewById(R.id.quote_author)
-                    tv1.text = capitalizeText(content!!)
-                    tv2.text = capitalizeText(author!!)
+                    val tv1: TextView? = findViewById(R.id.quote_content)
+                    val tv2: TextView? = findViewById(R.id.quote_author)
+                    if (tv1 != null) {
+                        tv1.text = capitalizeText(content!!)
+                    }
+                    if (tv2 != null) {
+                        tv2.text = capitalizeText(author!!)
+                    }
                 }
             }
         }
